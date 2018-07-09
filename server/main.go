@@ -61,7 +61,7 @@ func server(c io.ReadWriteCloser) error {
 	if err != nil {
 		fmt.Println("Serve error", err.Error())
 	}
-	fmt.Println("Serve finished")
+	fmt.Println("Serve finished, check debug.log to see client output")
 	return nil
 }
 
