@@ -561,45 +561,684 @@ func (p Hash_sum_Results_Promise) Struct() (Hash_sum_Results, error) {
 	return Hash_sum_Results{s}, err
 }
 
-const schema_db8274f9144abc7e = "x\xda\x8c\x93?h\x14A\x18\xc5\xdf7;\xeb\x04q" +
-	"9\x86=\x8b+4\x12N\xc4 g.\x87M\x04\xef" +
-	"\xb0\xf0o\xb3{*\x88\xdd\x10WW\xc8\xc5p\xb3G" +
-	"PA%\x8d\x8d h4\x8d\xa0\x82v\x9a\"uz" +
-	"! \xc4\xc2BEC\x10\x11\x04\x1b\x1b\x0d\x12Wf" +
-	"7\x9b,\x07\xc9Y\xdd\xb1\xf3\xde\xdb\xdf\xf7\xe6\xdb!" +
-	"N\x0dV\xb5\xf7q\xc0\x1f\xb2\xb7\xc5\xc1\xbd?\xafw" +
-	"G/oC\x96\x08\xe0\x02\xa8\xad\xd0\x08\x81\xc7\x0bO" +
-	"\xef\xbex\xbb}\xee>\xe4\x9e\xecd\x99\xae\x9b\x93\xf9" +
-	"\x0f\xab3\x85\xf3\xaff!\x8bV|s\xfeTq%" +
-	"\x9a\xfa\x08P\xed\x0d1r\xdf\x93\x00\xdcwt\xdc]" +
-	"5\xffb\xb1\xfc\xfc\xe1\xe1G\x0f\x16\xd37\xd8\xe6Y" +
-	"\xed+\x0d\x12\xc8\xfdAuP\xfc\xe5\xf3\xd8\xd9\xd9\xe9" +
-	"\xbfKy\x81\xc3\x86\x8d`'3\x82\xc7\xbfw\x94\x16" +
-	"\xe7N\x7f\xcb1\x1eb\x03\x86d\xe9F\xfd\xd2/\xef" +
-	"\xc8\xf7\x941\xb5\xeebS\xc6\xba?\xb1V\xa7/\\" +
-	"\xfe4\xf3\xe4g7\xaa{\x92-\xb8\xe7\x98!\xf5\xd9" +
-	"\x1d\xf7\x19\x138\x10\x87J\x87\x81>\x18Z\xc9oe" +
-	"TM\x8cO\x8c\x9cP:\xacL\xb6\xafDA\xb9Y" +
-	"\x0ftg,\xd2\xebB\xde-<\xa6F\xa3\xab\xedk" +
-	"\x95\xf1`\xf2L\xa8\xaa\xe5\xba\xa7\xda\xaa\xa57O^" +
-	"3\xc0#\xf2\xb9e\x03\xeb\xb5S6\x9b\x94G\xc1\xa4" +
-	"-n\xad\x856\xc8#\xda\x82UwZ\xe5f\xa0\x0b" +
-	"\x86\xd4\xe7\x16\x078\x01\xd2\x19\x04\xfc>\x8b\xfc\"\xa3" +
-	"\x82q\x93\x03F\x0e\xa8\xe7\xd8^\x7f2\xc4fY\x17" +
-	"U\xa4\xfe#\xcb`y\xaa-\xf2u\xd8\xbd\xfak\xa6" +
-	"\x85c\xcb9\xe4\xc6-\x83H\xe6(Xw>\x92\xa2" +
-	"\xfb\x92\xa2\xb3\xb5\xa3\xec\x13\x90\xd5a0\xb9W\xd0\xc6" +
-	"\xc6Q\xb6\xbc\xb24\x00&\x1d\xd1\x9fT\xd2 \xa1;" +
-	"\xad\xe4\"\xfe\x05\x00\x00\xff\xff7\x01\xfd>"
+type PluginRegistry struct{ Client capnp.Client }
+
+// PluginRegistry_TypeID is the unique identifier for the type PluginRegistry.
+const PluginRegistry_TypeID = 0xabdac39bf1dac733
+
+func (c PluginRegistry) Register(ctx context.Context, params func(PluginRegistry_register_Params) error, opts ...capnp.CallOption) PluginRegistry_register_Results_Promise {
+	if c.Client == nil {
+		return PluginRegistry_register_Results_Promise{Pipeline: capnp.NewPipeline(capnp.ErrorAnswer(capnp.ErrNullClient))}
+	}
+	call := &capnp.Call{
+		Ctx: ctx,
+		Method: capnp.Method{
+			InterfaceID:   0xabdac39bf1dac733,
+			MethodID:      0,
+			InterfaceName: "hashes/hashes.capnp:PluginRegistry",
+			MethodName:    "register",
+		},
+		Options: capnp.NewCallOptions(opts),
+	}
+	if params != nil {
+		call.ParamsSize = capnp.ObjectSize{DataSize: 0, PointerCount: 2}
+		call.ParamsFunc = func(s capnp.Struct) error { return params(PluginRegistry_register_Params{Struct: s}) }
+	}
+	return PluginRegistry_register_Results_Promise{Pipeline: capnp.NewPipeline(c.Client.Call(call))}
+}
+func (c PluginRegistry) Retrieve(ctx context.Context, params func(PluginRegistry_retrieve_Params) error, opts ...capnp.CallOption) PluginRegistry_retrieve_Results_Promise {
+	if c.Client == nil {
+		return PluginRegistry_retrieve_Results_Promise{Pipeline: capnp.NewPipeline(capnp.ErrorAnswer(capnp.ErrNullClient))}
+	}
+	call := &capnp.Call{
+		Ctx: ctx,
+		Method: capnp.Method{
+			InterfaceID:   0xabdac39bf1dac733,
+			MethodID:      1,
+			InterfaceName: "hashes/hashes.capnp:PluginRegistry",
+			MethodName:    "retrieve",
+		},
+		Options: capnp.NewCallOptions(opts),
+	}
+	if params != nil {
+		call.ParamsSize = capnp.ObjectSize{DataSize: 0, PointerCount: 1}
+		call.ParamsFunc = func(s capnp.Struct) error { return params(PluginRegistry_retrieve_Params{Struct: s}) }
+	}
+	return PluginRegistry_retrieve_Results_Promise{Pipeline: capnp.NewPipeline(c.Client.Call(call))}
+}
+
+type PluginRegistry_Server interface {
+	Register(PluginRegistry_register) error
+
+	Retrieve(PluginRegistry_retrieve) error
+}
+
+func PluginRegistry_ServerToClient(s PluginRegistry_Server) PluginRegistry {
+	c, _ := s.(server.Closer)
+	return PluginRegistry{Client: server.New(PluginRegistry_Methods(nil, s), c)}
+}
+
+func PluginRegistry_Methods(methods []server.Method, s PluginRegistry_Server) []server.Method {
+	if cap(methods) == 0 {
+		methods = make([]server.Method, 0, 2)
+	}
+
+	methods = append(methods, server.Method{
+		Method: capnp.Method{
+			InterfaceID:   0xabdac39bf1dac733,
+			MethodID:      0,
+			InterfaceName: "hashes/hashes.capnp:PluginRegistry",
+			MethodName:    "register",
+		},
+		Impl: func(c context.Context, opts capnp.CallOptions, p, r capnp.Struct) error {
+			call := PluginRegistry_register{c, opts, PluginRegistry_register_Params{Struct: p}, PluginRegistry_register_Results{Struct: r}}
+			return s.Register(call)
+		},
+		ResultsSize: capnp.ObjectSize{DataSize: 0, PointerCount: 0},
+	})
+
+	methods = append(methods, server.Method{
+		Method: capnp.Method{
+			InterfaceID:   0xabdac39bf1dac733,
+			MethodID:      1,
+			InterfaceName: "hashes/hashes.capnp:PluginRegistry",
+			MethodName:    "retrieve",
+		},
+		Impl: func(c context.Context, opts capnp.CallOptions, p, r capnp.Struct) error {
+			call := PluginRegistry_retrieve{c, opts, PluginRegistry_retrieve_Params{Struct: p}, PluginRegistry_retrieve_Results{Struct: r}}
+			return s.Retrieve(call)
+		},
+		ResultsSize: capnp.ObjectSize{DataSize: 0, PointerCount: 1},
+	})
+
+	return methods
+}
+
+// PluginRegistry_register holds the arguments for a server call to PluginRegistry.register.
+type PluginRegistry_register struct {
+	Ctx     context.Context
+	Options capnp.CallOptions
+	Params  PluginRegistry_register_Params
+	Results PluginRegistry_register_Results
+}
+
+// PluginRegistry_retrieve holds the arguments for a server call to PluginRegistry.retrieve.
+type PluginRegistry_retrieve struct {
+	Ctx     context.Context
+	Options capnp.CallOptions
+	Params  PluginRegistry_retrieve_Params
+	Results PluginRegistry_retrieve_Results
+}
+
+type PluginRegistry_register_Params struct{ capnp.Struct }
+
+// PluginRegistry_register_Params_TypeID is the unique identifier for the type PluginRegistry_register_Params.
+const PluginRegistry_register_Params_TypeID = 0xdd461841b457421a
+
+func NewPluginRegistry_register_Params(s *capnp.Segment) (PluginRegistry_register_Params, error) {
+	st, err := capnp.NewStruct(s, capnp.ObjectSize{DataSize: 0, PointerCount: 2})
+	return PluginRegistry_register_Params{st}, err
+}
+
+func NewRootPluginRegistry_register_Params(s *capnp.Segment) (PluginRegistry_register_Params, error) {
+	st, err := capnp.NewRootStruct(s, capnp.ObjectSize{DataSize: 0, PointerCount: 2})
+	return PluginRegistry_register_Params{st}, err
+}
+
+func ReadRootPluginRegistry_register_Params(msg *capnp.Message) (PluginRegistry_register_Params, error) {
+	root, err := msg.RootPtr()
+	return PluginRegistry_register_Params{root.Struct()}, err
+}
+
+func (s PluginRegistry_register_Params) String() string {
+	str, _ := text.Marshal(0xdd461841b457421a, s.Struct)
+	return str
+}
+
+func (s PluginRegistry_register_Params) Name() (string, error) {
+	p, err := s.Struct.Ptr(0)
+	return p.Text(), err
+}
+
+func (s PluginRegistry_register_Params) HasName() bool {
+	p, err := s.Struct.Ptr(0)
+	return p.IsValid() || err != nil
+}
+
+func (s PluginRegistry_register_Params) NameBytes() ([]byte, error) {
+	p, err := s.Struct.Ptr(0)
+	return p.TextBytes(), err
+}
+
+func (s PluginRegistry_register_Params) SetName(v string) error {
+	return s.Struct.SetText(0, v)
+}
+
+func (s PluginRegistry_register_Params) Plugin() Plugin {
+	p, _ := s.Struct.Ptr(1)
+	return Plugin{Client: p.Interface().Client()}
+}
+
+func (s PluginRegistry_register_Params) HasPlugin() bool {
+	p, err := s.Struct.Ptr(1)
+	return p.IsValid() || err != nil
+}
+
+func (s PluginRegistry_register_Params) SetPlugin(v Plugin) error {
+	if v.Client == nil {
+		return s.Struct.SetPtr(1, capnp.Ptr{})
+	}
+	seg := s.Segment()
+	in := capnp.NewInterface(seg, seg.Message().AddCap(v.Client))
+	return s.Struct.SetPtr(1, in.ToPtr())
+}
+
+// PluginRegistry_register_Params_List is a list of PluginRegistry_register_Params.
+type PluginRegistry_register_Params_List struct{ capnp.List }
+
+// NewPluginRegistry_register_Params creates a new list of PluginRegistry_register_Params.
+func NewPluginRegistry_register_Params_List(s *capnp.Segment, sz int32) (PluginRegistry_register_Params_List, error) {
+	l, err := capnp.NewCompositeList(s, capnp.ObjectSize{DataSize: 0, PointerCount: 2}, sz)
+	return PluginRegistry_register_Params_List{l}, err
+}
+
+func (s PluginRegistry_register_Params_List) At(i int) PluginRegistry_register_Params {
+	return PluginRegistry_register_Params{s.List.Struct(i)}
+}
+
+func (s PluginRegistry_register_Params_List) Set(i int, v PluginRegistry_register_Params) error {
+	return s.List.SetStruct(i, v.Struct)
+}
+
+func (s PluginRegistry_register_Params_List) String() string {
+	str, _ := text.MarshalList(0xdd461841b457421a, s.List)
+	return str
+}
+
+// PluginRegistry_register_Params_Promise is a wrapper for a PluginRegistry_register_Params promised by a client call.
+type PluginRegistry_register_Params_Promise struct{ *capnp.Pipeline }
+
+func (p PluginRegistry_register_Params_Promise) Struct() (PluginRegistry_register_Params, error) {
+	s, err := p.Pipeline.Struct()
+	return PluginRegistry_register_Params{s}, err
+}
+
+func (p PluginRegistry_register_Params_Promise) Plugin() Plugin {
+	return Plugin{Client: p.Pipeline.GetPipeline(1).Client()}
+}
+
+type PluginRegistry_register_Results struct{ capnp.Struct }
+
+// PluginRegistry_register_Results_TypeID is the unique identifier for the type PluginRegistry_register_Results.
+const PluginRegistry_register_Results_TypeID = 0xbff9313a8c8e0b48
+
+func NewPluginRegistry_register_Results(s *capnp.Segment) (PluginRegistry_register_Results, error) {
+	st, err := capnp.NewStruct(s, capnp.ObjectSize{DataSize: 0, PointerCount: 0})
+	return PluginRegistry_register_Results{st}, err
+}
+
+func NewRootPluginRegistry_register_Results(s *capnp.Segment) (PluginRegistry_register_Results, error) {
+	st, err := capnp.NewRootStruct(s, capnp.ObjectSize{DataSize: 0, PointerCount: 0})
+	return PluginRegistry_register_Results{st}, err
+}
+
+func ReadRootPluginRegistry_register_Results(msg *capnp.Message) (PluginRegistry_register_Results, error) {
+	root, err := msg.RootPtr()
+	return PluginRegistry_register_Results{root.Struct()}, err
+}
+
+func (s PluginRegistry_register_Results) String() string {
+	str, _ := text.Marshal(0xbff9313a8c8e0b48, s.Struct)
+	return str
+}
+
+// PluginRegistry_register_Results_List is a list of PluginRegistry_register_Results.
+type PluginRegistry_register_Results_List struct{ capnp.List }
+
+// NewPluginRegistry_register_Results creates a new list of PluginRegistry_register_Results.
+func NewPluginRegistry_register_Results_List(s *capnp.Segment, sz int32) (PluginRegistry_register_Results_List, error) {
+	l, err := capnp.NewCompositeList(s, capnp.ObjectSize{DataSize: 0, PointerCount: 0}, sz)
+	return PluginRegistry_register_Results_List{l}, err
+}
+
+func (s PluginRegistry_register_Results_List) At(i int) PluginRegistry_register_Results {
+	return PluginRegistry_register_Results{s.List.Struct(i)}
+}
+
+func (s PluginRegistry_register_Results_List) Set(i int, v PluginRegistry_register_Results) error {
+	return s.List.SetStruct(i, v.Struct)
+}
+
+func (s PluginRegistry_register_Results_List) String() string {
+	str, _ := text.MarshalList(0xbff9313a8c8e0b48, s.List)
+	return str
+}
+
+// PluginRegistry_register_Results_Promise is a wrapper for a PluginRegistry_register_Results promised by a client call.
+type PluginRegistry_register_Results_Promise struct{ *capnp.Pipeline }
+
+func (p PluginRegistry_register_Results_Promise) Struct() (PluginRegistry_register_Results, error) {
+	s, err := p.Pipeline.Struct()
+	return PluginRegistry_register_Results{s}, err
+}
+
+type PluginRegistry_retrieve_Params struct{ capnp.Struct }
+
+// PluginRegistry_retrieve_Params_TypeID is the unique identifier for the type PluginRegistry_retrieve_Params.
+const PluginRegistry_retrieve_Params_TypeID = 0xbe8e3957ca22d22e
+
+func NewPluginRegistry_retrieve_Params(s *capnp.Segment) (PluginRegistry_retrieve_Params, error) {
+	st, err := capnp.NewStruct(s, capnp.ObjectSize{DataSize: 0, PointerCount: 1})
+	return PluginRegistry_retrieve_Params{st}, err
+}
+
+func NewRootPluginRegistry_retrieve_Params(s *capnp.Segment) (PluginRegistry_retrieve_Params, error) {
+	st, err := capnp.NewRootStruct(s, capnp.ObjectSize{DataSize: 0, PointerCount: 1})
+	return PluginRegistry_retrieve_Params{st}, err
+}
+
+func ReadRootPluginRegistry_retrieve_Params(msg *capnp.Message) (PluginRegistry_retrieve_Params, error) {
+	root, err := msg.RootPtr()
+	return PluginRegistry_retrieve_Params{root.Struct()}, err
+}
+
+func (s PluginRegistry_retrieve_Params) String() string {
+	str, _ := text.Marshal(0xbe8e3957ca22d22e, s.Struct)
+	return str
+}
+
+func (s PluginRegistry_retrieve_Params) Name() (string, error) {
+	p, err := s.Struct.Ptr(0)
+	return p.Text(), err
+}
+
+func (s PluginRegistry_retrieve_Params) HasName() bool {
+	p, err := s.Struct.Ptr(0)
+	return p.IsValid() || err != nil
+}
+
+func (s PluginRegistry_retrieve_Params) NameBytes() ([]byte, error) {
+	p, err := s.Struct.Ptr(0)
+	return p.TextBytes(), err
+}
+
+func (s PluginRegistry_retrieve_Params) SetName(v string) error {
+	return s.Struct.SetText(0, v)
+}
+
+// PluginRegistry_retrieve_Params_List is a list of PluginRegistry_retrieve_Params.
+type PluginRegistry_retrieve_Params_List struct{ capnp.List }
+
+// NewPluginRegistry_retrieve_Params creates a new list of PluginRegistry_retrieve_Params.
+func NewPluginRegistry_retrieve_Params_List(s *capnp.Segment, sz int32) (PluginRegistry_retrieve_Params_List, error) {
+	l, err := capnp.NewCompositeList(s, capnp.ObjectSize{DataSize: 0, PointerCount: 1}, sz)
+	return PluginRegistry_retrieve_Params_List{l}, err
+}
+
+func (s PluginRegistry_retrieve_Params_List) At(i int) PluginRegistry_retrieve_Params {
+	return PluginRegistry_retrieve_Params{s.List.Struct(i)}
+}
+
+func (s PluginRegistry_retrieve_Params_List) Set(i int, v PluginRegistry_retrieve_Params) error {
+	return s.List.SetStruct(i, v.Struct)
+}
+
+func (s PluginRegistry_retrieve_Params_List) String() string {
+	str, _ := text.MarshalList(0xbe8e3957ca22d22e, s.List)
+	return str
+}
+
+// PluginRegistry_retrieve_Params_Promise is a wrapper for a PluginRegistry_retrieve_Params promised by a client call.
+type PluginRegistry_retrieve_Params_Promise struct{ *capnp.Pipeline }
+
+func (p PluginRegistry_retrieve_Params_Promise) Struct() (PluginRegistry_retrieve_Params, error) {
+	s, err := p.Pipeline.Struct()
+	return PluginRegistry_retrieve_Params{s}, err
+}
+
+type PluginRegistry_retrieve_Results struct{ capnp.Struct }
+
+// PluginRegistry_retrieve_Results_TypeID is the unique identifier for the type PluginRegistry_retrieve_Results.
+const PluginRegistry_retrieve_Results_TypeID = 0xf5854d8d211ff6dd
+
+func NewPluginRegistry_retrieve_Results(s *capnp.Segment) (PluginRegistry_retrieve_Results, error) {
+	st, err := capnp.NewStruct(s, capnp.ObjectSize{DataSize: 0, PointerCount: 1})
+	return PluginRegistry_retrieve_Results{st}, err
+}
+
+func NewRootPluginRegistry_retrieve_Results(s *capnp.Segment) (PluginRegistry_retrieve_Results, error) {
+	st, err := capnp.NewRootStruct(s, capnp.ObjectSize{DataSize: 0, PointerCount: 1})
+	return PluginRegistry_retrieve_Results{st}, err
+}
+
+func ReadRootPluginRegistry_retrieve_Results(msg *capnp.Message) (PluginRegistry_retrieve_Results, error) {
+	root, err := msg.RootPtr()
+	return PluginRegistry_retrieve_Results{root.Struct()}, err
+}
+
+func (s PluginRegistry_retrieve_Results) String() string {
+	str, _ := text.Marshal(0xf5854d8d211ff6dd, s.Struct)
+	return str
+}
+
+func (s PluginRegistry_retrieve_Results) Plugin() Plugin {
+	p, _ := s.Struct.Ptr(0)
+	return Plugin{Client: p.Interface().Client()}
+}
+
+func (s PluginRegistry_retrieve_Results) HasPlugin() bool {
+	p, err := s.Struct.Ptr(0)
+	return p.IsValid() || err != nil
+}
+
+func (s PluginRegistry_retrieve_Results) SetPlugin(v Plugin) error {
+	if v.Client == nil {
+		return s.Struct.SetPtr(0, capnp.Ptr{})
+	}
+	seg := s.Segment()
+	in := capnp.NewInterface(seg, seg.Message().AddCap(v.Client))
+	return s.Struct.SetPtr(0, in.ToPtr())
+}
+
+// PluginRegistry_retrieve_Results_List is a list of PluginRegistry_retrieve_Results.
+type PluginRegistry_retrieve_Results_List struct{ capnp.List }
+
+// NewPluginRegistry_retrieve_Results creates a new list of PluginRegistry_retrieve_Results.
+func NewPluginRegistry_retrieve_Results_List(s *capnp.Segment, sz int32) (PluginRegistry_retrieve_Results_List, error) {
+	l, err := capnp.NewCompositeList(s, capnp.ObjectSize{DataSize: 0, PointerCount: 1}, sz)
+	return PluginRegistry_retrieve_Results_List{l}, err
+}
+
+func (s PluginRegistry_retrieve_Results_List) At(i int) PluginRegistry_retrieve_Results {
+	return PluginRegistry_retrieve_Results{s.List.Struct(i)}
+}
+
+func (s PluginRegistry_retrieve_Results_List) Set(i int, v PluginRegistry_retrieve_Results) error {
+	return s.List.SetStruct(i, v.Struct)
+}
+
+func (s PluginRegistry_retrieve_Results_List) String() string {
+	str, _ := text.MarshalList(0xf5854d8d211ff6dd, s.List)
+	return str
+}
+
+// PluginRegistry_retrieve_Results_Promise is a wrapper for a PluginRegistry_retrieve_Results promised by a client call.
+type PluginRegistry_retrieve_Results_Promise struct{ *capnp.Pipeline }
+
+func (p PluginRegistry_retrieve_Results_Promise) Struct() (PluginRegistry_retrieve_Results, error) {
+	s, err := p.Pipeline.Struct()
+	return PluginRegistry_retrieve_Results{s}, err
+}
+
+func (p PluginRegistry_retrieve_Results_Promise) Plugin() Plugin {
+	return Plugin{Client: p.Pipeline.GetPipeline(0).Client()}
+}
+
+type Plugin struct{ Client capnp.Client }
+
+// Plugin_TypeID is the unique identifier for the type Plugin.
+const Plugin_TypeID = 0xddb5f6e52bc5e491
+
+func (c Plugin) Call(ctx context.Context, params func(Plugin_call_Params) error, opts ...capnp.CallOption) Plugin_call_Results_Promise {
+	if c.Client == nil {
+		return Plugin_call_Results_Promise{Pipeline: capnp.NewPipeline(capnp.ErrorAnswer(capnp.ErrNullClient))}
+	}
+	call := &capnp.Call{
+		Ctx: ctx,
+		Method: capnp.Method{
+			InterfaceID:   0xddb5f6e52bc5e491,
+			MethodID:      0,
+			InterfaceName: "hashes/hashes.capnp:Plugin",
+			MethodName:    "call",
+		},
+		Options: capnp.NewCallOptions(opts),
+	}
+	if params != nil {
+		call.ParamsSize = capnp.ObjectSize{DataSize: 0, PointerCount: 0}
+		call.ParamsFunc = func(s capnp.Struct) error { return params(Plugin_call_Params{Struct: s}) }
+	}
+	return Plugin_call_Results_Promise{Pipeline: capnp.NewPipeline(c.Client.Call(call))}
+}
+
+type Plugin_Server interface {
+	Call(Plugin_call) error
+}
+
+func Plugin_ServerToClient(s Plugin_Server) Plugin {
+	c, _ := s.(server.Closer)
+	return Plugin{Client: server.New(Plugin_Methods(nil, s), c)}
+}
+
+func Plugin_Methods(methods []server.Method, s Plugin_Server) []server.Method {
+	if cap(methods) == 0 {
+		methods = make([]server.Method, 0, 1)
+	}
+
+	methods = append(methods, server.Method{
+		Method: capnp.Method{
+			InterfaceID:   0xddb5f6e52bc5e491,
+			MethodID:      0,
+			InterfaceName: "hashes/hashes.capnp:Plugin",
+			MethodName:    "call",
+		},
+		Impl: func(c context.Context, opts capnp.CallOptions, p, r capnp.Struct) error {
+			call := Plugin_call{c, opts, Plugin_call_Params{Struct: p}, Plugin_call_Results{Struct: r}}
+			return s.Call(call)
+		},
+		ResultsSize: capnp.ObjectSize{DataSize: 0, PointerCount: 1},
+	})
+
+	return methods
+}
+
+// Plugin_call holds the arguments for a server call to Plugin.call.
+type Plugin_call struct {
+	Ctx     context.Context
+	Options capnp.CallOptions
+	Params  Plugin_call_Params
+	Results Plugin_call_Results
+}
+
+type Plugin_call_Params struct{ capnp.Struct }
+
+// Plugin_call_Params_TypeID is the unique identifier for the type Plugin_call_Params.
+const Plugin_call_Params_TypeID = 0xd2c8d8bb4101cc7f
+
+func NewPlugin_call_Params(s *capnp.Segment) (Plugin_call_Params, error) {
+	st, err := capnp.NewStruct(s, capnp.ObjectSize{DataSize: 0, PointerCount: 0})
+	return Plugin_call_Params{st}, err
+}
+
+func NewRootPlugin_call_Params(s *capnp.Segment) (Plugin_call_Params, error) {
+	st, err := capnp.NewRootStruct(s, capnp.ObjectSize{DataSize: 0, PointerCount: 0})
+	return Plugin_call_Params{st}, err
+}
+
+func ReadRootPlugin_call_Params(msg *capnp.Message) (Plugin_call_Params, error) {
+	root, err := msg.RootPtr()
+	return Plugin_call_Params{root.Struct()}, err
+}
+
+func (s Plugin_call_Params) String() string {
+	str, _ := text.Marshal(0xd2c8d8bb4101cc7f, s.Struct)
+	return str
+}
+
+// Plugin_call_Params_List is a list of Plugin_call_Params.
+type Plugin_call_Params_List struct{ capnp.List }
+
+// NewPlugin_call_Params creates a new list of Plugin_call_Params.
+func NewPlugin_call_Params_List(s *capnp.Segment, sz int32) (Plugin_call_Params_List, error) {
+	l, err := capnp.NewCompositeList(s, capnp.ObjectSize{DataSize: 0, PointerCount: 0}, sz)
+	return Plugin_call_Params_List{l}, err
+}
+
+func (s Plugin_call_Params_List) At(i int) Plugin_call_Params {
+	return Plugin_call_Params{s.List.Struct(i)}
+}
+
+func (s Plugin_call_Params_List) Set(i int, v Plugin_call_Params) error {
+	return s.List.SetStruct(i, v.Struct)
+}
+
+func (s Plugin_call_Params_List) String() string {
+	str, _ := text.MarshalList(0xd2c8d8bb4101cc7f, s.List)
+	return str
+}
+
+// Plugin_call_Params_Promise is a wrapper for a Plugin_call_Params promised by a client call.
+type Plugin_call_Params_Promise struct{ *capnp.Pipeline }
+
+func (p Plugin_call_Params_Promise) Struct() (Plugin_call_Params, error) {
+	s, err := p.Pipeline.Struct()
+	return Plugin_call_Params{s}, err
+}
+
+type Plugin_call_Results struct{ capnp.Struct }
+
+// Plugin_call_Results_TypeID is the unique identifier for the type Plugin_call_Results.
+const Plugin_call_Results_TypeID = 0xd5f6be4896770945
+
+func NewPlugin_call_Results(s *capnp.Segment) (Plugin_call_Results, error) {
+	st, err := capnp.NewStruct(s, capnp.ObjectSize{DataSize: 0, PointerCount: 1})
+	return Plugin_call_Results{st}, err
+}
+
+func NewRootPlugin_call_Results(s *capnp.Segment) (Plugin_call_Results, error) {
+	st, err := capnp.NewRootStruct(s, capnp.ObjectSize{DataSize: 0, PointerCount: 1})
+	return Plugin_call_Results{st}, err
+}
+
+func ReadRootPlugin_call_Results(msg *capnp.Message) (Plugin_call_Results, error) {
+	root, err := msg.RootPtr()
+	return Plugin_call_Results{root.Struct()}, err
+}
+
+func (s Plugin_call_Results) String() string {
+	str, _ := text.Marshal(0xd5f6be4896770945, s.Struct)
+	return str
+}
+
+func (s Plugin_call_Results) Message() (string, error) {
+	p, err := s.Struct.Ptr(0)
+	return p.Text(), err
+}
+
+func (s Plugin_call_Results) HasMessage() bool {
+	p, err := s.Struct.Ptr(0)
+	return p.IsValid() || err != nil
+}
+
+func (s Plugin_call_Results) MessageBytes() ([]byte, error) {
+	p, err := s.Struct.Ptr(0)
+	return p.TextBytes(), err
+}
+
+func (s Plugin_call_Results) SetMessage(v string) error {
+	return s.Struct.SetText(0, v)
+}
+
+// Plugin_call_Results_List is a list of Plugin_call_Results.
+type Plugin_call_Results_List struct{ capnp.List }
+
+// NewPlugin_call_Results creates a new list of Plugin_call_Results.
+func NewPlugin_call_Results_List(s *capnp.Segment, sz int32) (Plugin_call_Results_List, error) {
+	l, err := capnp.NewCompositeList(s, capnp.ObjectSize{DataSize: 0, PointerCount: 1}, sz)
+	return Plugin_call_Results_List{l}, err
+}
+
+func (s Plugin_call_Results_List) At(i int) Plugin_call_Results {
+	return Plugin_call_Results{s.List.Struct(i)}
+}
+
+func (s Plugin_call_Results_List) Set(i int, v Plugin_call_Results) error {
+	return s.List.SetStruct(i, v.Struct)
+}
+
+func (s Plugin_call_Results_List) String() string {
+	str, _ := text.MarshalList(0xd5f6be4896770945, s.List)
+	return str
+}
+
+// Plugin_call_Results_Promise is a wrapper for a Plugin_call_Results promised by a client call.
+type Plugin_call_Results_Promise struct{ *capnp.Pipeline }
+
+func (p Plugin_call_Results_Promise) Struct() (Plugin_call_Results, error) {
+	s, err := p.Pipeline.Struct()
+	return Plugin_call_Results{s}, err
+}
+
+const schema_db8274f9144abc7e = "x\xda\x9cUQh#U\x14\xbdw\xde\x9b\x9d\xaa\x0d" +
+	"\xe11\x11\xec\x8av\xad\x11\xdcJ\xa3\xd9\xfa\xb3\x11M" +
+	"\x1bp\xb7\xac\x083QY\x15\xfc\x18\xea\x98\x04\x92X" +
+	"f&\x86(Z](\x8b\xb0\xaeT\xb7-\xa8\xa0\x16" +
+	"\xfd(j\xa1\xc5~\x88\xa5RD\xaa\xc5\x8fZ\x104" +
+	"\x12\x8b\xa8\x94\xfa\xa7`\xb5\x88\x8e\xbc7\x99dL\x9a" +
+	"V\xfa\xd5i\xdf=\xf7\x9es\xcf\xbd\xb7'\xa4!)" +
+	".o\x1f\x03\xd05\xf9\x98k\xbe\xfc\xd7\xda\x8d\xce\xfb" +
+	"\xcf\x03\xebA\x00\xaa\x00\x0c>B\x12\x08\xd4]\x7f\xeb" +
+	"\xd2\xbb_]\xbd\xf8\x0a\xb0\x13\xfe\xcb0y\x9a\xbf\x0c" +
+	"\xaeU\x7f}\xfd\xd3\xea{\xc0\"\xc4}n\xf9\\d" +
+	"\xcf\xb9\xf0\x1d\x00\x0e\x0e\x90\xe3\xa8\xdeM\x14\x00\xf54" +
+	"\xb9\xa8N\xf2/w\xb9\xfa\xf7L\xf8\xe1\x0f\xe6\xdb\xa2" +
+	"+DBuBD\xbf@\xce\xaas\":\xb6\xd9\xb7" +
+	"~\xfe\xf4\xe5\x15`7#\x80\x8c\xbc\xec$y\x0d\x01" +
+	"\xd5\xb7I\x12\xd0\x1d\xb9\xe6\xf2\xa5D|\xef\x13/@" +
+	"\xd0Z%\xb3\x9c\x96\xf2\xc3;SwM\xbf\xba\xe1I" +
+	"\xf1\xa0\x0b\xa4\x9fC?\x12\xd0\xf1/q\xf8\xe3o>" +
+	"\xdf\x04v\xbd\x0f\xfd\xd6\xd3z\xefU\xe5\xe9\x91\x95\xdd" +
+	"\xaf\xbd\x17\x0f\xbaJR\x1c\xfa\x85\x80\x1eO\x9d\xffp" +
+	"\xf8\xba3\xb5:-\x89\x07\xecx\xb4\xf6H\x19\xd0\x9d" +
+	"\xfc\xe9\xb3\xdb~\xde]\xaa\xb5\xaaT\x1f\xa2U\xd5\xe0" +
+	"\xb5\xd4\xc7\xe8Yu\x82\x7f\xb9?~\x9f\x7fp\xfe\xca" +
+	"?[A\xa6\x05z\x8ag+Q^\xee\x8d?\xbb{" +
+	"6\x16\xef\xdb\x0e\xb82E\xfb8\xd3\xadg\x92O\xfc" +
+	"\xa1\xdd\xf3\x8b\xe7\x8a\x07}\x96^\xe0\xd0\x17\x054~" +
+	"\xe5\xd1Lm\xe6\xcd\xdf\xda\x88\xcc\xd1uuI\x10Y" +
+	"\xa0\x17U\x949\x91\xdan\xefM/\xdd?\xf1{\xb0" +
+	"\xdb;tV\xc8\xa2I\x18p\xb3\x86\x9d5\xed\xdb\xb3" +
+	"D\xfc\x8c\x8d\x1ac\xc5\xb1\xc4\x88agce+\xe7" +
+	"\x98\xd1t\xd2\xb4Ky\xc7n\x04\xd2\xd6\xc03\xc6\xa8" +
+	"\xf3\xa4U\x89\x15\xcd\xf2\x03Y#\x1eMj\x86e\x14" +
+	"\xec\xfd3k\xf9R&WL\x9b\x99\x9c\xed\x10\xab\xa2" +
+	"!\xea]D\x06h\xf4\x1f}\xfbY\xfc\x1cH\xec\xa4" +
+	"\x82\xd8\x18\x19\xf4\xd5\xb0\x1b\xf8\xdb\xb5\x8ak\x89D\xa6" +
+	"\x05\x00C\xe8Z\xa6c\xe5\xcc\xa7L\xf1\x9b\x86\xd8Y" +
+	"\\\x9d3\xf0\xfaT\xd4\xf7\x97\x01\xfd\xfe3\x96\x02\x89" +
+	"\xc9\xcax]\xd7\x7f3\xca\x9dDY\x95\x98O#\xca" +
+	"\x1bA\x0a\xb6N\x09\x05\xa0\x08\xc0B\xfd\x00z\x17A" +
+	"=\"a\xb8h\x14L\xec\x06\x09\xbb\xe1\xff&\xf6\xd4" +
+	"F\xd3\xa6]R\x82\xa6\xb4\xbbg\x97\x0a<,\xcc\xbd" +
+	"\xebD\x80\xa31\x04\x12\x86\x00\x0f\xb2+6j\xe4\xf3" +
+	"m\xbe\xd2N\x81iob X6\xd5,;^0" +
+	"m\xdb\xc8\x1cQ\xba\xdf\xd3\xaeF\xee\x93\\R\x94\xa0" +
+	"~\x87\x84\x0c1\x82\xfc\x8f\x03\x09\x00\xfdV\x82\xfa\x9d" +
+	"-\x8dN\x8e\x89\xc4\xc8\x9a\x0b\x0d\x88,@Cj\xa5" +
+	"Ar\xc5\xe6\x9c\xf8'\x06\xfd\x8b\xc2X\xbf\x98\x930" +
+	"\xd7~\xc8\xd8\xd5wJ\xeb\x15\x9d\xecd\xcb\xe3\x86c" +
+	"\x1clK\xc3a\xcd\xb0\x94\xa0'\xf2a\xcb\xb9\x9f7" +
+	"m#\xc1\x9a7\xe6\xa0\xde\xf0\xfc\x00\xcd\x15\xf6\x8f\x1e" +
+	"\xfa\xffrX\xfc\x14H\xec\x16\xbe\xc2\xfe\xbdC\xff\x86" +
+	"\xb3\x9e>\x90XH\xe9\x15-\x19B\xc5.\x15\x8e\xb0" +
+	"b\xfe&\x04\xf5$\x9az:\xba\xfdo\x00\x00\x00\xff" +
+	"\xff\xc4\x80!G"
 
 func init() {
 	schemas.Register(schema_db8274f9144abc7e,
 		0x80ac741ec7fb8f65,
 		0x92b20ad1a58ca0ca,
+		0xabdac39bf1dac733,
 		0xaead580f97fddabc,
+		0xbe8e3957ca22d22e,
+		0xbff9313a8c8e0b48,
 		0xd093963b95a4e107,
+		0xd2c8d8bb4101cc7f,
+		0xd5f6be4896770945,
+		0xdd461841b457421a,
+		0xddb5f6e52bc5e491,
 		0xdffe94ae546cdee3,
 		0xe74bb2d0190cf89c,
 		0xea3e50f7663f7bdf,
-		0xf29f97dd675a9431)
+		0xf29f97dd675a9431,
+		0xf5854d8d211ff6dd)
 }

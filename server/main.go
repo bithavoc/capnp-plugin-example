@@ -1,12 +1,14 @@
 package main
 
 import (
+	"context"
 	"crypto/sha1"
 	"fmt"
 	"hash"
 	"io"
 	"log"
 	"os/exec"
+	"sync"
 	"time"
 
 	"github.com/bithavoc/procplugin/common"
@@ -47,12 +49,51 @@ func (hs hashServer) Sum(call hashes.Hash_sum) error {
 	return call.Results.SetHash(s)
 }
 
-func server(c io.ReadWriteCloser) error {
-	// Create a new locally implemented HashFactory.
-	main := hashes.HashFactory_ServerToClient(hashFactory{})
+type Registry struct {
+	plugins map[string]hashes.Plugin
+}
 
+func (r *Registry) Register(reg hashes.PluginRegistry_register) error {
+
+	name, err := reg.Params.Name()
+	if err != nil {
+		return err
+	}
+	fmt.Println("registry registering", name)
+	plugin := reg.Params.Plugin()
+	r.plugins[name] = plugin
+	callResult, err := plugin.Call(context.Background(), func(p hashes.Plugin_call_Params) error {
+		return nil
+	}).Struct()
+	if err != nil {
+		fmt.Println("registry plugin test error", err.Error())
+		return err
+	}
+	msg, _ := callResult.Message()
+	fmt.Println("registry registered", r.plugins, msg)
+	return nil
+}
+func (r *Registry) Retrieve(ret hashes.PluginRegistry_retrieve) error {
+	fmt.Println("registry retrieve")
+	name, err := ret.Params.Name()
+	if err != nil {
+		return err
+	}
+	fmt.Println("Retrieve success", name)
+	plugin := r.plugins[name]
+	ret.Results.SetPlugin(plugin)
+	return nil
+}
+
+var registry = &Registry{
+	plugins: map[string]hashes.Plugin{},
+}
+var hashServerToClient = hashes.HashFactory_ServerToClient(hashFactory{})
+var registryServerToClient = hashes.PluginRegistry_ServerToClient(registry)
+
+func server(c io.ReadWriteCloser) error {
 	// Listen for calls, using the HashFactory as the bootstrap interface.
-	conn := rpc.NewConn(rpc.StreamTransport(c), rpc.MainInterface(main.Client))
+	conn := rpc.NewConn(rpc.StreamTransport(c), rpc.MainInterface(hashServerToClient.Client), rpc.MainInterface(registryServerToClient.Client))
 
 	// Wait for connection to abort.
 
@@ -60,13 +101,19 @@ func server(c io.ReadWriteCloser) error {
 	err := conn.Wait()
 	if err != nil {
 		fmt.Println("Serve error", err.Error())
+		return err
 	}
 	fmt.Println("Serve finished")
 	return nil
 }
 
-func main() {
-	cmd := exec.Command("../client/client")
+var waitGroup = sync.WaitGroup{}
+
+func startPlugin(execPath string) {
+	defer func() {
+		waitGroup.Done()
+	}()
+	cmd := exec.Command(execPath)
 	inPipeReader, inPipeWriter := io.Pipe()
 	outPipeReader, outPipeWriter := io.Pipe()
 
@@ -82,5 +129,13 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println("Pluggin stopped")
+}
+
+func main() {
+	go startPlugin("../middle/middle")
+	time.Sleep(500 * time.Millisecond)
+	go startPlugin("../client/client")
+	waitGroup.Add(2)
+	waitGroup.Wait()
+	fmt.Println("Pluggins stopped")
 }

@@ -11,3 +11,12 @@ interface Hash {
 	write @0 (data :Data) -> ();
 	sum @1 () -> (hash :Data);
 }
+
+interface PluginRegistry {
+	register @0 (name :Text, plugin :Plugin) -> ();
+	retrieve @1 (name :Text) -> (plugin :Plugin);
+}
+
+interface Plugin {
+	call @0 () -> (message :Text);
+}
